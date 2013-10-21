@@ -2,7 +2,7 @@ require 'securerandom'
 
 class Issue
   attr_accessor :text, :summary, :fullname, :address, :images, :email,
-    :dni, :uuid, :created_at
+    :dni, :uuid, :created_at, :confirmed
 
   def initialize(text, summary, fullname, address, images, email,
     dni, uuid = SecureRandom.uuid, confirmed = false, created_at = Time.new)

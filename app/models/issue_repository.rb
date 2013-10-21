@@ -21,6 +21,15 @@ class IssueRepository
     @connection.exec('UPDATE issues SET confirmed = true WHERE uuid=$1', [issue.uuid])
   end
 
+  def fetch_confirmed
+    result_set = @connection.exec('select * from issues where confirmed=true')
+
+    result_set.map do |row|
+      Issue.from_map(row)
+    end
+
+  end
+
   private
 
   def insert_query
