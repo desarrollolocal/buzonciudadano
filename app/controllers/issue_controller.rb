@@ -23,8 +23,7 @@ class IssueController < ApplicationController
   end
 
   def wall
-    @issues = [Issue.from_map({'summary'=> 'da text', 'created_at'=> Time.new,
-                               'images'=> [], 'address'=> 'the adress'})]
+    @issues = IssueService.new.fetch_confirmed
 
     render 'buzon/muro'
   end
