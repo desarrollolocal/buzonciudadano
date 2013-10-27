@@ -4,8 +4,9 @@ require 'issue_service'
 class IssueController < ApplicationController
   def create
     issue = add_issue(params)
-    IssueMailer.new_issue(issue.email, issue.fullname, issue.uuid).deliver
-    render json: { success: true, issue: get_hash_from(issue) }
+    IssueMailer.new_issue(issue.email, issue.fullname, issue.uuid)
+
+    render 'buzon/sugerenciacreada'
   end
 
   def summary
@@ -36,10 +37,5 @@ class IssueController < ApplicationController
     issue = IssueService.new.add(request_dto)
 
     return issue
-  end
-
-  def get_hash_from(issue)
-    {text: issue.text, summary: issue.summary, fullname: issue.fullname,
-     address: issue.address, images: issue.images, dni: issue.dni, email: issue.email}
   end
 end
