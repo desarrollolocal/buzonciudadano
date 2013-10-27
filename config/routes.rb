@@ -9,9 +9,7 @@ Buzonciudadano::Application.routes.draw do
   get "buzon/resumen"
   get "buzon/sugerencia"
 
-  get "issue/wall"
-
-
+  get 'muro', to: "issue#wall"
 
   match 'issue/confirm/:uuid' => 'issue#confirm', via: [:get]
 
