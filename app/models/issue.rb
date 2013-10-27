@@ -4,8 +4,9 @@ class Issue
   attr_accessor :text, :summary, :fullname, :address, :images, :email,
     :dni, :uuid, :created_at, :confirmed
 
-  def initialize(text, summary, fullname, address, images, email,
-    dni, uuid = SecureRandom.uuid, confirmed = false, created_at = Time.new)
+
+  #las imagenes en un setter
+  def initialize(text, summary, fullname, address, images, email, dni)
     @text = text
     @summary = summary
     @fullname = fullname
@@ -13,17 +14,25 @@ class Issue
     @images = images
     @email = email
     @dni = dni
-    @uuid = uuid
-    @confirmed = confirmed
-    @created_at = created_at
+    @uuid = SecureRandom.uuid
+    @confirmed = false
+    @created_at = Time.new
+  end
+
+  def has_images?
+    !@images.nil? && @images.size != 0
   end
 
   def confirmed?; @confirmed end
 
   def self.from_map(a_map)
-    Issue.new(a_map['text'], a_map['summary'], a_map['fullname'],
-      a_map['address'], a_map['images'], a_map['email'], a_map['dni'],
-      a_map['uuid'], a_map['confirmed'], a_map['created_at'])
+    issue = Issue.new(a_map['text'], a_map['summary'], a_map['fullname'],
+      a_map['address'], a_map['images'], a_map['email'], a_map['dni'])
+    issue.uuid = a_map['uuid']
+    issue.confirmed = a_map['confirmed']
+    issue.created_at = a_map['created_at']
+
+    return issue
   end
 end
 

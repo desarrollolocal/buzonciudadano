@@ -1,20 +1,11 @@
-
-
-
 <% @issues.each do |issue|  %>
-
-
-<ul >
-<li> <%= issue.summary %> </li>
-<li> </li>
-<li> </li>
-<li> </li>
-</ul>
-
-
-
-
+    <div>
+        <ul>
+            <li> <%= issue.summary %> </li>
+            <li> <%= issue.created_at %></li>
+            <li> <%= issue.address %> </li>
+            <li> <%= issue.has_images? %> </li>
+        </ul>
+    </div>
 <% end %>
-
-
 
