@@ -4,7 +4,7 @@ require 'issue_service'
 class IssueController < ApplicationController
   def create
     issue = add_issue(params)
-    IssueMailer.new_issue(issue.email, issue.fullname, issue.uuid)
+    send_mail issue
 
     render 'buzon/sugerenciacreada'
   end
@@ -31,6 +31,10 @@ class IssueController < ApplicationController
   end
 
   private
+
+  def send_mail(issue)
+    IssueMailer.send_confirmation_link(issue.email, issue.fullname, issue.uuid)
+  end
 
   def add_issue(params)
     request_dto = OpenStruct.new(params)
