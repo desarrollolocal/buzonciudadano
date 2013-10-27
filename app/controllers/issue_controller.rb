@@ -3,7 +3,8 @@ require 'issue_service'
 
 class IssueController < ApplicationController
   def create
-    issue = make_issue(params)
+    issue = add_issue(params)
+    IssueMailer.new_issue(issue.email, issue.fullname, issue.uuid).deliver
     render json: { success: true, issue: get_hash_from(issue) }
   end
 
@@ -30,10 +31,11 @@ class IssueController < ApplicationController
 
   private
 
-  def make_issue(params)
-    issue = IssueService.new.add(OpenStruct.new(params))
-    IssueMailer.new_issue(issue.email, issue.fullname, issue.uuid).deliver
-    issue
+  def add_issue(params)
+    request_dto = OpenStruct.new(params)
+    issue = IssueService.new.add(request_dto)
+
+    return issue
   end
 
   def get_hash_from(issue)
