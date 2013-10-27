@@ -70,8 +70,10 @@ describe IssueRepository do
   end
 
   def any_issue
-    Issue.new('a text', 'a summary', 'the name',
-      'an address', ['image one', 'image two'], nil, nil)
+    issue = Issue.new('a text', 'a summary', 'the name',
+      'an address', nil, nil)
+    issue.add_images(['image one', 'image two'])
+    return issue
   end
 
 end

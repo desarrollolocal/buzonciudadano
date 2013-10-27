@@ -6,7 +6,9 @@ class IssueService
 
   def add(issue_data)
     issue = Issue.new(issue_data.text, issue_data.summary, issue_data.fullname,
-      issue_data.address, issue_data.images, issue_data.email, issue_data.dni)
+      issue_data.address, issue_data.email, issue_data.dni)
+    issue.add_images(issue_data.images)
+
     @issues.put(issue)
     issue
   end
