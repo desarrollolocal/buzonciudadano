@@ -20,6 +20,7 @@ describe IssueRepository do
     result.getvalue(0, 3).should eql 'the name'
     result.getvalue(0, 4).should eql 'an address'
     result.getvalue(0, 5).should eql 'image one,image two'
+
   end
 
   describe 'finds' do
