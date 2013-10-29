@@ -20,6 +20,12 @@ describe IssueService do
     service.confirm('a unique id')
   end
 
+  it 'finds all the confirmed issues' do
+    repository.should_receive(:fetch_confirmed)
+
+    service.fetch_confirmed
+  end
+
   private
 
   def an_issue

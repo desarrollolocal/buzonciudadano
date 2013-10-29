@@ -3,8 +3,10 @@ require 'issue_service'
 
 class IssueController < ApplicationController
   def create
-    issue = make_issue(params)
-    render json: { success: true, issue: get_hash_from(issue) }
+    issue = add_issue(params)
+    send_mail issue
+
+    render 'buzon/sugerenciacreada'
   end
 
   def summary
@@ -23,22 +25,21 @@ class IssueController < ApplicationController
   end
 
   def wall
-    @issues = [Issue.from_map({summary: 'da text', created_at: Time.new,
-                               images: [], address: 'the adress'})]
+    @issues = IssueService.new.fetch_confirmed
 
     render 'buzon/muro'
   end
 
   private
 
-  def make_issue(params)
-    issue = IssueService.new.add(OpenStruct.new(params))
-    IssueMailer.new_issue(issue.email, issue.fullname, issue.uuid).deliver
-    issue
+  def send_mail(issue)
+    IssueMailer.send_confirmation_link(issue.email, issue.fullname, issue.uuid)
   end
 
-  def get_hash_from(issue)
-    {text: issue.text, summary: issue.summary, fullname: issue.fullname,
-     address: issue.address, images: issue.images, dni: issue.dni, email: issue.email}
+  def add_issue(params)
+    request_dto = OpenStruct.new(params)
+    issue = IssueService.new.add(request_dto)
+
+    return issue
   end
 end
