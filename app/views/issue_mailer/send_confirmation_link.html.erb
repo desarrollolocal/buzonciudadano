@@ -6,7 +6,7 @@
   <body>
     <h1>Has publicado una sugerencia en buzonciudadano!</h1>
     <p>
-      Todavia no esta publicada, para confirmar que has sido tu el que la ha escrito solamente tienes que seguir este enlace <%= @url %>
+      Todavia no esta publicada, para confirmar que has sido tu el que la ha escrito solamente tienes que seguir este enlace <%= url_for(controller: 'issue', action: 'confirm', uuid: @issue.uuid, only_path: false) %>
       <br/>
       <br/>
     </p>

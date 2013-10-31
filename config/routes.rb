@@ -3,6 +3,7 @@ Buzonciudadano::Application.routes.draw do
 
   post "images/new"
   post "issue/create"
+  get "issue/confirm"
 
   post 'sugerencias/resumen', to: 'issue#summary'
 

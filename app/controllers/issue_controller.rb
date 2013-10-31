@@ -3,8 +3,8 @@ require 'issue_service'
 
 class IssueController < ApplicationController
   def create
-    issue = add_issue(params)
-    send_mail issue
+    @issue = add_issue(params)
+    send_mail @issue
 
     render 'buzon/sugerenciacreada'
   end
@@ -33,7 +33,7 @@ class IssueController < ApplicationController
   private
 
   def send_mail(issue)
-    IssueMailer.send_confirmation_link(issue.email, issue.fullname, issue.uuid)
+    IssueMailer.send_confirmation_link @issue
   end
 
   def add_issue(params)
