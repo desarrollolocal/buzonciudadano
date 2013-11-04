@@ -1,0 +1,43 @@
+
+  <ul class="breadcrumb">
+  <li>Resumen <span class="divider"> &gt; </span></li>
+  <li class="active"> Descripción <span class="divider"> &gt; </span></li>
+  <li>Final</li>
+  </ul>
+
+  <div class="row-fluid">
+
+    <div class="well well-small">
+      <p class="lead"><%= @issue[:summary] %> </p>
+    </div>
+
+  </div>
+
+  <div class="row-fluid">
+    <p><%= @issue[:fullname] %> </p>
+  </div>
+
+
+  <div class="row-fluid">
+    <p><%= @issue[:address] %> </p>
+  </div>
+
+
+  <div class="row-fluid">
+    <p><%= @issue[:created_at] %> </p>
+  </div>
+
+
+  <div class="row-fluid">
+    <% @issue[:images].each do |image| %>
+      <img src="<%= image %>" />
+    <% end %>
+  </div>
+
+
+
+  <div class="row-fluid">
+    <legend> Descripción </legend>
+    <textarea name="text" class="text"> <%= @issue[:text] %>
+    </textarea>
+  </div>
