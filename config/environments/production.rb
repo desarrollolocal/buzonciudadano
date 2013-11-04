@@ -51,6 +51,7 @@ Buzonciudadano::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { host: 'buzon', port: 3000 }
+  ActionMailer::Base.default from: 'elbuzondelciudadano@gmail.com'
 
   # Enable threaded mode
   # config.threadsafe!
