@@ -1,5 +1,5 @@
 Buzonciudadano::Application.routes.draw do
-  root :to => "issue#wall"
+  root to: "issue#wall"
 
   post "images/new"
   post "issue/create"
