@@ -31,9 +31,7 @@ class IssueController < ApplicationController
   end
 
   def show
-    @issue = { text: 'the description', summary: 'el titulo', fullname: 'el nombre tel tipo',
-      address: 'la direccion donde esta' , images: ['http://placeskull.com/170/170', 'http://placeskull.com/170/170'],
-      created_at: Time.new}
+    @issue = IssueService.new.fetch_by_uuid(params[:uuid])
 
     render 'buzon/fichasugerencia'
   end

@@ -22,4 +22,8 @@ class IssueService
     @issues.fetch_confirmed
   end
 
+  def fetch_by_uuid(uuid)
+    @issues.find_by_uuid(uuid)
+  end
+
 end
